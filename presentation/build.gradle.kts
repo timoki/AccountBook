@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+    id("com.google.gms.google-services")
 }
 
 val properties = org.jetbrains.kotlin.konan.properties.Properties()
@@ -63,6 +64,7 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":domain"))
 
+    val googleFirebaseVersion = properties.getProperty("google_firebase_version")
     val hiltVersion = properties.getProperty("hilt_version")
     val lifecycleVersion = properties.getProperty("lifecycle_version")
     val roomVersion = properties.getProperty("room_version")
@@ -84,17 +86,17 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
 
-    //Hilt
+    // Hilt
     implementation("com.google.dagger:hilt-android:$hiltVersion")
     kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
 
-    //Retrofit + Okhttp
+    // Retrofit + Okhttp
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
     implementation("com.squareup.okhttp3:okhttp:$okhttpVersion")
     implementation("com.squareup.okhttp3:logging-interceptor:$okhttpVersion")
 
-    //Gson
+    // Gson
     implementation("com.google.code.gson:gson:2.10")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
@@ -121,7 +123,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion")
 
-    //Paging 3.0
+    // Paging 3.0
     implementation("androidx.paging:paging-runtime-ktx:$paging3Version")
     testImplementation("androidx.paging:paging-common:$paging3Version")
 
@@ -135,6 +137,9 @@ dependencies {
     // Shimmer
     implementation("com.facebook.shimmer:shimmer:$shimmerVersion")
 
-    //Coil
+    // Coil
     implementation("io.coil-kt:coil:$coilVersion")
+
+    // Firebase
+    implementation(platform("com.google.firebase:firebase-bom:$googleFirebaseVersion"))
 }
