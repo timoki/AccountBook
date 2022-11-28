@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "542350945570",
+    "project_id": "accountbook-47546",
+    "storage_bucket": "accountbook-47546.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:542350945570:android:782910eac32b494174c97b",
+        "android_client_info": {
+          "package_name": "kr.timoky.accountbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "542350945570-r83mm19l05a0h2l6g8961rd4e063g5c9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1BADiZv3I_10jjZ9i_rZWFlgRo5YQ1c0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "542350945570-r83mm19l05a0h2l6g8961rd4e063g5c9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

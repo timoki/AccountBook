@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name_release">가계부</string>
+    <string name="app_name_debug">가계부 디버그</string>
+</resources>
