@@ -1,21 +1,28 @@
 package kr.timoky.accountbook.view.main
 
-import android.os.Bundle
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import dagger.hilt.android.AndroidEntryPoint
 import kr.timoky.accountbook.R
 import kr.timoky.accountbook.base.BaseActivity
 import kr.timoky.accountbook.databinding.ActivityMainBinding
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+    private val navHostFragment by lazy {
+        supportFragmentManager.findFragmentById(R.id.navHostFragmentContainer) as NavHostFragment
+    }
+
+    private val navController by lazy {
+        navHostFragment.navController
     }
 
     override fun init() {
-        TODO("Not yet implemented")
+
     }
 
     override fun initViewModelCallback() {
-        TODO("Not yet implemented")
+
     }
 }

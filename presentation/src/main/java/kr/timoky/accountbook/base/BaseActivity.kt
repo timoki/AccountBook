@@ -5,13 +5,12 @@ import android.os.PersistableBundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
+import androidx.lifecycle.ViewModelLazy
 import androidx.viewbinding.ViewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kr.timoky.accountbook.utils.observeOnLifecycleDestroy
 import java.lang.reflect.ParameterizedType
 
-@AndroidEntryPoint
 abstract class BaseActivity<VB : ViewBinding, VM : BaseViewModel> : AppCompatActivity() {
     abstract fun init()
     open fun initListener() {}
@@ -19,7 +18,7 @@ abstract class BaseActivity<VB : ViewBinding, VM : BaseViewModel> : AppCompatAct
     open fun navigationBackStackCallback() {}
 
     protected lateinit var binding: VB
-    abstract val viewModel: VM
+    protected lateinit var viewModel: VM
 
     private val type = (javaClass.genericSuperclass as ParameterizedType)
     private val classVB = type.actualTypeArguments[0] as Class<VB>
@@ -34,7 +33,8 @@ abstract class BaseActivity<VB : ViewBinding, VM : BaseViewModel> : AppCompatAct
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
-        binding = inflateMethod.invoke(null) as VB
+        binding = inflateMethod.invoke(null, layoutInflater) as VB
+        viewModel = ViewModelLazy(classVM.kotlin, { viewModelStore }, { defaultViewModelProviderFactory }).value
 
         init()
         initListener()

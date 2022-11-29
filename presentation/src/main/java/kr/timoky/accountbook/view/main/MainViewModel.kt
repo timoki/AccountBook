@@ -8,5 +8,5 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
 
 ) : BaseViewModel() {
-
+    val aaa = 0
 }
