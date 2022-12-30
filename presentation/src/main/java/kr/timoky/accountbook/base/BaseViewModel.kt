@@ -2,12 +2,9 @@ package kr.timoky.accountbook.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.BufferOverflow
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 abstract class BaseViewModel : ViewModel() {
 
@@ -22,7 +19,7 @@ abstract class BaseViewModel : ViewModel() {
         _isLoading.emit(false)
     }
 
-    private val _isShowKeyboard = MutableSharedFlow<Boolean>(
+    /*private val _isShowKeyboard = MutableSharedFlow<Boolean>(
         replay = 1,
         extraBufferCapacity = 0,
         onBufferOverflow = BufferOverflow.DROP_OLDEST
@@ -35,7 +32,7 @@ abstract class BaseViewModel : ViewModel() {
 
     fun showKeyboard() = viewModelScope.launch {
         _isShowKeyboard.emit(false)
-    }
+    }*/
 
     private val _backStack = MutableSharedFlow<Boolean>(
         replay = 1,
@@ -52,10 +49,10 @@ abstract class BaseViewModel : ViewModel() {
         _backStack.emit(false)
     }
 
-    private val _showSnackBar = Channel<Pair<String, Int>>(Channel.CONFLATED)
+    /*private val _showSnackBar = Channel<Pair<String, Int>>(Channel.CONFLATED)
     val showSnackBar = _showSnackBar.receiveAsFlow()
 
     fun showSnackBar(message: String, paddingVertical: Int) = viewModelScope.launch {
         _showSnackBar.send(message to paddingVertical)
-    }
+    }*/
 }

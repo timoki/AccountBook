@@ -1,12 +1,17 @@
 package kr.timoky.accountbook.view.main
 
-import dagger.hilt.android.lifecycle.HiltViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
 import kr.timoky.accountbook.base.BaseViewModel
-import javax.inject.Inject
 
-@HiltViewModel
-class MainViewModel @Inject constructor(
+class MainViewModel: BaseViewModel() {
 
-) : BaseViewModel() {
-    val aaa = 0
+    private val _menuClickChannel = Channel<Unit>(Channel.CONFLATED)
+    val menuClickChannel = _menuClickChannel.receiveAsFlow()
+
+    fun onMenuClick() = viewModelScope.launch {
+        _menuClickChannel.send(Unit)
+    }
 }

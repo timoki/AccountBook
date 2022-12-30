@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
+    //id("dagger.hilt.android.plugin")
     id("com.google.gms.google-services")
 }
 
@@ -65,7 +65,7 @@ dependencies {
     implementation(project(":domain"))
 
     val googleFirebaseVersion = properties.getProperty("google_firebase_version")
-    val hiltVersion = properties.getProperty("hilt_version")
+    //val hiltVersion = properties.getProperty("hilt_version")
     val lifecycleVersion = properties.getProperty("lifecycle_version")
     val roomVersion = properties.getProperty("room_version")
     val retrofitVersion = properties.getProperty("retrofit_version")
@@ -87,8 +87,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
 
     // Hilt
-    implementation("com.google.dagger:hilt-android:$hiltVersion")
-    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
+    //implementation("com.google.dagger:hilt-android:$hiltVersion")
+    //kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
 
     // Retrofit + Okhttp
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
@@ -102,7 +102,7 @@ dependencies {
 
     // androidX
     implementation("androidx.activity:activity-ktx:1.6.1")
-    implementation("androidx.fragment:fragment-ktx:1.5.4")
+    implementation("androidx.fragment:fragment-ktx:1.5.5")
 
     // Lifecycle
     // ViewModel

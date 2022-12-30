@@ -10,4 +10,16 @@
         android:name="kr.timoky.accountbook.view.list.ListFragment"
         android:label="ListFragment"
         tools:layout="@layout/fragment_list" />
+
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="kr.timoky.accountbook.view.calendar.CalendarFragment"
+        android:label="CalendarFragment"
+        tools:layout="@layout/fragment_calendar" />
+
+    <fragment
+        android:id="@+id/chartFragment"
+        android:name="kr.timoky.accountbook.view.chart.ChartFragment"
+        android:label="ChartFragment"
+        tools:layout="@layout/fragment_chart" />
 </navigation>

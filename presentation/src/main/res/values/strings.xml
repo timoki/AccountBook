@@ -3,6 +3,7 @@
     <string name="app_name_debug">가계부 디버그</string>
     <string name="str_list">리스트</string>
     <string name="str_calendar">달력</string>
+    <string name="str_chart">분석</string>
     <string name="str_setting">설정</string>
     <string name="str_logout">로그아웃</string>
     <string name="str_category">항목관리</string>
