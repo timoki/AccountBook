@@ -1,11 +1,27 @@
 <resources>
     <string name="app_name_release">가계부</string>
     <string name="app_name_debug">가계부 디버그</string>
+
+    <!-- 기초 -->
+    <string name="retry">새로고침</string>
+
+    <!-- 탭 -->
     <string name="str_list">리스트</string>
     <string name="str_calendar">달력</string>
     <string name="str_chart">분석</string>
+
+    <!-- 메뉴 -->
     <string name="str_setting">설정</string>
     <string name="str_logout">로그아웃</string>
     <string name="str_category">항목관리</string>
+
+    <!-- 아이템 -->
     <string name="str_memo">메모</string>
+
+    <!-- 결과 없음 -->
+    <string name="no_history_account">아직 작성한 내역이 없습니다.</string>
+    <string name="no_history_error">목록을 불러오는 동안 오류가 발생하였습니다.\n화면을 아래로 내려 새로고침 해주세요.</string>
+
+    <!-- 에러 -->
+    <string name="str_load_state_error">목록을 가져오는데 실패했습니다.\n잠시 후 다시 시도해 주세요.</string>
 </resources>

@@ -9,14 +9,14 @@ import androidx.room.PrimaryKey
     foreignKeys = [
         ForeignKey(
             entity = CategoryEntity::class,
-            parentColumns = ["id"],
+            parentColumns = ["_categoryId"],
             childColumns = ["categoryId"]
         )
     ]
 )
 data class ExpenseItemEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    val _expenseId: Int = 1,
     val date: Long,
     val money: Int,
     val isConsumption: Boolean,

@@ -14,7 +14,7 @@ import java.lang.reflect.ParameterizedType
 abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragment() {
     abstract fun init()
     open fun initListener() {}
-    open fun initViewModelCallback() = with(viewModel) {}
+    abstract fun initViewModelCallback()
     open fun navigationBackStackCallback() {}
 
     protected lateinit var binding: VB

@@ -7,4 +7,8 @@ class ChartFragment: BaseFragment<FragmentChartBinding, ChartViewModel>() {
     override fun init() {
 
     }
+
+    override fun initViewModelCallback() {
+
+    }
 }

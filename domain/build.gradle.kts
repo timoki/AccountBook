@@ -22,6 +22,7 @@ android {
 dependencies {
     val kotlinVersion = properties.getProperty("kotlin_version")
     val coroutineVersion = properties.getProperty("coroutine_version")
+    val paging3Version = properties.getProperty("paging3_version")
 
     // Kotlin
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
@@ -32,4 +33,8 @@ dependencies {
     // Coroutine
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion")
+
+    // Paging 3.0
+    implementation("androidx.paging:paging-runtime-ktx:$paging3Version")
+    testImplementation("androidx.paging:paging-common:$paging3Version")
 }

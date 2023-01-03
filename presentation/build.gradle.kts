@@ -2,7 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
-    //id("dagger.hilt.android.plugin")
+    id("dagger.hilt.android.plugin")
     id("com.google.gms.google-services")
 }
 
@@ -65,7 +65,7 @@ dependencies {
     implementation(project(":domain"))
 
     val googleFirebaseVersion = properties.getProperty("google_firebase_version")
-    //val hiltVersion = properties.getProperty("hilt_version")
+    val hiltVersion = properties.getProperty("hilt_version")
     val lifecycleVersion = properties.getProperty("lifecycle_version")
     val roomVersion = properties.getProperty("room_version")
     val retrofitVersion = properties.getProperty("retrofit_version")
@@ -76,19 +76,14 @@ dependencies {
     val lottieVersion = properties.getProperty("lottie_version")
     val shimmerVersion = properties.getProperty("shimmer_version")
     val coilVersion = properties.getProperty("coil_version")
+    val swiperefreshVersion = properties.getProperty("swiperefresh_version")
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.appcompat:appcompat:1.5.1")
     implementation("com.google.android.material:material:1.7.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.4")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
 
     // Hilt
-    //implementation("com.google.dagger:hilt-android:$hiltVersion")
-    //kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
+    implementation("com.google.dagger:hilt-android:$hiltVersion")
+    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
 
     // Retrofit + Okhttp
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
@@ -100,11 +95,18 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
-    // androidX
+    // androidX <
     implementation("androidx.activity:activity-ktx:1.6.1")
     implementation("androidx.fragment:fragment-ktx:1.5.5")
 
+    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.appcompat:appcompat:1.5.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    androidTestImplementation("androidx.test.ext:junit:1.1.4")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0")
+
     // Lifecycle
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
     // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
     // LiveData
@@ -113,6 +115,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
     // optional - helpers for implementing LifecycleOwner in a Service
     implementation("androidx.lifecycle:lifecycle-service:$lifecycleVersion")
+    // SwipeRefreshLayout
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:$swiperefreshVersion")
+    // >
 
     // room
     implementation("androidx.room:room-runtime:$roomVersion")

@@ -7,12 +7,14 @@ import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
 import kr.timoky.accountbook.R
 import kr.timoky.accountbook.databinding.ActivityMainBinding
 import kr.timoky.accountbook.utils.observeInLifecycleStop
 import kr.timoky.accountbook.utils.observeOnLifecycleDestroy
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val binding: ActivityMainBinding by lazy {
