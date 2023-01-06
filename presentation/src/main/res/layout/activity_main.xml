@@ -10,83 +10,78 @@
             type="kr.timoky.accountbook.view.main.MainViewModel" />
     </data>
 
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/drawer"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:openDrawer="end">
+        tools:context=".view.main.MainActivity">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/navHostFragmentContainer"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".view.main.MainActivity">
+            android:padding="20dp"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNav"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:navGraph="@navigation/navigation" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/topFrame"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:paddingHorizontal="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/bottom_nav_drawer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="kr.timoky.accountbook.view.navi.MainBottomDrawerFragment"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawablePadding="5dp"
-                    android:gravity="center_vertical"
-                    android:text="@string/app_name"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:drawableStartCompat="@mipmap/icon_logo_small"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomAppbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:fabAlignmentMode="center"
+            app:fabCradleRoundedCornerRadius="32dp"
+            app:fabCradleMargin="8dp"
+            app:hideOnScroll="true">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginVertical="4dp"
+                android:paddingHorizontal="4dp"
+                android:onClick="@{() -> viewModel.onBottomNavClick()}"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
+                    android:id="@+id/bottomAppbarArrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="@{() -> viewModel.onMenuClick()}"
-                    android:src="@drawable/baseline_menu_black_24"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/ic_arrow_drop_up"
                     tools:ignore="ContentDescription" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/navHostFragmentContainer"
-                android:name="androidx.navigation.fragment.NavHostFragment"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:padding="20dp"
-                app:defaultNavHost="true"
-                app:layout_constraintBottom_toTopOf="@+id/bottomNav"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/topFrame"
-                app:navGraph="@navigation/navigation" />
+                <TextView
+                    android:id="@+id/bottomAppbarTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginHorizontal="8dp"
+                    android:text="@{viewModel.currentPageTitle}"
+                    android:textColor="@color/black"
+                    tools:text="리스트"/>
+            </LinearLayout>
+        </com.google.android.material.bottomappbar.BottomAppBar>
 
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottomNav"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:labelVisibilityMode="labeled"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:menu="@menu/bottom_menu" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/navigationView"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:menu="@menu/action_menu" />
-    </androidx.drawerlayout.widget.DrawerLayout>
+            app:layout_anchor="@id/bottomAppbar"
+            android:backgroundTint="@color/white"
+            android:onClick="@{() -> viewModel.fabClick()}"
+            android:contentDescription="@string/str_add_expense"
+            android:src="@drawable/fab_add_expense" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

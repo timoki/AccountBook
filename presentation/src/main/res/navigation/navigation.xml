@@ -5,6 +5,18 @@
     android:id="@+id/navigation"
     app:startDestination="@id/listFragment">
 
+    <action android:id="@+id/action_global_listFragment"
+        app:destination="@+id/listFragment"/>
+
+    <action android:id="@+id/action_global_calendarFragment"
+        app:destination="@+id/calendarFragment"/>
+
+    <action android:id="@+id/action_global_chartFragment"
+        app:destination="@+id/chartFragment"/>
+
+    <action android:id="@+id/action_global_addExpenseFragment"
+        app:destination="@+id/addExpenseFragment"/>
+
     <fragment
         android:id="@+id/listFragment"
         android:name="kr.timoky.accountbook.view.list.ListFragment"
@@ -22,4 +34,10 @@
         android:name="kr.timoky.accountbook.view.chart.ChartFragment"
         android:label="ChartFragment"
         tools:layout="@layout/fragment_chart" />
+
+    <fragment
+        android:id="@+id/addExpenseFragment"
+        android:name="kr.timoky.accountbook.view.add.AddExpenseFragment"
+        android:label="AddExpenseFragment"
+        tools:layout="@layout/fragment_add_expense" />
 </navigation>

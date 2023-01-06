@@ -12,7 +12,7 @@ import kr.timoky.data.mapper.ObjectMapper.toModel
 import kr.timoky.data.repository.dataSource.LocalDataSource
 import kr.timoky.domain.model.ExpenseItemModel
 import kr.timoky.domain.model.Result
-import kr.timoky.domain.model.base.ExpenseModel
+import kr.timoky.domain.model.ExpenseModel
 import kr.timoky.domain.repository.ExpenseRepository
 import kr.timoky.domain.utils.ErrorCallback
 import java.sql.Date

@@ -8,17 +8,11 @@
         <variable
             name="errorString"
             type="String" />
-
-        <variable
-            name="refreshListener"
-            type="androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener" />
     </data>
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/noResultSwipe"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:setOnRefreshListener="@{refreshListener}">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <TextView
             android:layout_width="wrap_content"
@@ -29,6 +23,10 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             app:drawableTopCompat="@drawable/outline_error_outline_black_48"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/no_history_account" />
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

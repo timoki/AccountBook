@@ -7,4 +7,7 @@ data class CategoryModel(
     val name: String,
     val isUse: Boolean,
     val color: Int,
-): BaseModel
+): BaseModel {
+    override val key: Int
+        get() = id ?: 0
+}

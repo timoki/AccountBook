@@ -2,7 +2,7 @@ package kr.timoky.domain.usecase
 
 import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
-import kr.timoky.domain.model.base.ExpenseModel
+import kr.timoky.domain.model.ExpenseModel
 import kr.timoky.domain.repository.ExpenseRepository
 import java.sql.Date
 import javax.inject.Inject

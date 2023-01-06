@@ -4,7 +4,7 @@ import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
 import kr.timoky.domain.model.ExpenseItemModel
 import kr.timoky.domain.model.Result
-import kr.timoky.domain.model.base.ExpenseModel
+import kr.timoky.domain.model.ExpenseModel
 import java.sql.Date
 
 interface ExpenseRepository {

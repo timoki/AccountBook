@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import kr.timoky.accountbook.databinding.ItemListBinding
 import kr.timoky.accountbook.utils.Common.calculationTime
-import kr.timoky.domain.model.base.ExpenseModel
+import kr.timoky.domain.model.ExpenseModel
 
 class ExpenseListAdapter :
     PagingDataAdapter<ExpenseModel, ExpenseListAdapter.ViewHolder>(diffUtil) {

@@ -5,9 +5,8 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kr.timoky.accountbook.base.BaseViewModel
-import kr.timoky.domain.model.base.ExpenseModel
+import kr.timoky.domain.model.ExpenseModel
 import kr.timoky.domain.usecase.GetExpenseListUseCase
 import java.sql.Date
 import javax.inject.Inject

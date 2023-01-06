@@ -1,5 +1,6 @@
 package kr.timoky.accountbook.view.list
 
+import android.view.View
 import androidx.paging.LoadState
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import dagger.hilt.android.AndroidEntryPoint
@@ -9,7 +10,7 @@ import kr.timoky.accountbook.base.MyLoadStateAdapter
 import kr.timoky.accountbook.databinding.FragmentListBinding
 import kr.timoky.accountbook.utils.observeOnLifecycleStop
 import kr.timoky.accountbook.view.list.adapter.ExpenseListAdapter
-import kr.timoky.domain.model.base.ExpenseModel
+import kr.timoky.domain.model.ExpenseModel
 
 @AndroidEntryPoint
 class ListFragment : BaseFragment<FragmentListBinding, ListViewModel>(),
@@ -20,9 +21,8 @@ class ListFragment : BaseFragment<FragmentListBinding, ListViewModel>(),
     }
 
     override fun init(): Unit = with(binding) {
-        //noResult.errorString = getString(R.string.no_history_account)
-        noResult.refreshListener = this@ListFragment
         refreshListener = this@ListFragment
+        vm = viewModel
 
         listRv.adapter = adapter.withLoadStateFooter(
             MyLoadStateAdapter {
@@ -39,7 +39,14 @@ class ListFragment : BaseFragment<FragmentListBinding, ListViewModel>(),
         })
 
         adapter.loadStateFlow.observeOnLifecycleStop(viewLifecycleOwner) {
+            setShimmer(false)
+
             binding.isResult = when {
+                it.refresh is LoadState.Loading -> {
+                    setShimmer(true)
+                    true
+                }
+
                 it.refresh is LoadState.Error -> {
                     binding.noResult.errorString = getString(R.string.no_history_error)
                     false
@@ -63,12 +70,20 @@ class ListFragment : BaseFragment<FragmentListBinding, ListViewModel>(),
         }
     }
 
-    override fun onRefresh() {
-        // 여기가 타지 않는 이유를 밝혀야함
-        if (binding.isResult == true) {
-            binding.swipe.isRefreshing = false
-        } else {
-            binding.noResult.noResultSwipe.isRefreshing = false
+    private fun setShimmer(isStart: Boolean) {
+        binding.shimmer.apply {
+            if (isStart) {
+                visibility = View.VISIBLE
+                startShimmer()
+            } else {
+                visibility = View.GONE
+                stopShimmer()
+            }
         }
+    }
+
+    override fun onRefresh() {
+        binding.swipe.isRefreshing = false
+        adapter.refresh()
     }
 }

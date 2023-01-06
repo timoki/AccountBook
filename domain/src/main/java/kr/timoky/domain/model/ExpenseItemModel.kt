@@ -8,5 +8,9 @@ data class ExpenseItemModel(
     val money: Int,
     val isConsumption: Boolean,
     val categoryId: Int,
+    val address: AddressModel,
     val memo: String,
-): BaseModel
+): BaseModel {
+    override val key: Int
+        get() = id ?: 0
+}

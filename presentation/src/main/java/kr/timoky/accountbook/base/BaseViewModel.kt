@@ -15,7 +15,7 @@ abstract class BaseViewModel : ViewModel() {
         _isLoading.emit(true)
     }
 
-    fun hideLoadingDialog() = viewModelScope.launch{
+    fun hideLoadingDialog() = viewModelScope.launch {
         _isLoading.emit(false)
     }
 

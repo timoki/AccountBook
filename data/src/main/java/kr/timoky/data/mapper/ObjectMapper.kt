@@ -1,11 +1,13 @@
 package kr.timoky.data.mapper
 
+import kr.timoky.data.local.entity.AddressEntity
 import kr.timoky.data.local.entity.CategoryEntity
 import kr.timoky.data.local.entity.ExpenseEntity
 import kr.timoky.data.local.entity.ExpenseItemEntity
+import kr.timoky.domain.model.AddressModel
 import kr.timoky.domain.model.CategoryModel
 import kr.timoky.domain.model.ExpenseItemModel
-import kr.timoky.domain.model.base.ExpenseModel
+import kr.timoky.domain.model.ExpenseModel
 
 object ObjectMapper {
     fun ExpenseEntity.toModel(): ExpenseModel = ExpenseModel(
@@ -19,7 +21,8 @@ object ObjectMapper {
         money = this.money,
         isConsumption = this.isConsumption,
         categoryId = this.categoryId,
-        memo = this.memo
+        address = this.address.toModel(),
+        memo = this.memo,
     )
 
     fun ExpenseItemModel.toEntity(): ExpenseItemEntity = ExpenseItemEntity(
@@ -27,6 +30,7 @@ object ObjectMapper {
         money = this.money,
         isConsumption = this.isConsumption,
         categoryId = this.categoryId,
+        address = this.address.toEntity(),
         memo = this.memo,
     )
 
@@ -45,5 +49,19 @@ object ObjectMapper {
         name = this.name,
         isUse = this.isUse,
         color = this.color
+    )
+
+    private fun AddressEntity.toModel(): AddressModel = AddressModel(
+        address = this.address,
+        addressSub = this.addressSub,
+        lat = this.lat,
+        lng = this.lng,
+    )
+
+    private fun AddressModel.toEntity(): AddressEntity = AddressEntity(
+        address = this.address,
+        addressSub = this.addressSub,
+        lat = this.lat,
+        lng = this.lng,
     )
 }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="kr.timoky.accountbook.R" />
+
+        <variable
+            name="item"
+            type="kr.timoky.domain.model.navi.NavigateType" />
+
+        <variable
+            name="listener"
+            type="kr.timoky.accountbook.base.adapter.AdapterItemListener" />
+    </data>
+
+    <CheckedTextView
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:paddingHorizontal="32dp"
+        android:background="?attr/selectableItemBackground"
+        android:onClick="@{() -> listener.onRootClick(item)}"
+        android:gravity="center_vertical|start"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="@{item.getItem.title}"
+        android:checked="@{item.getItem.checked}"
+        android:textAppearance="?attr/textAppearanceSubtitle1"
+        android:textColor="@color/black"
+        app:setIconSrc="@{item.getItem.icon}"
+        android:drawablePadding="32dp"
+        tools:drawableStart="@drawable/baseline_menu_black_18"
+        tools:text="메뉴"/>
+</layout>

@@ -1,5 +1,6 @@
 package kr.timoky.data.local.entity
 
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
@@ -21,5 +22,7 @@ data class ExpenseItemEntity(
     val money: Int,
     val isConsumption: Boolean,
     val categoryId: Int,
+    @Embedded
+    val address: AddressEntity,
     val memo: String,
 )
