@@ -3,169 +3,230 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View" />
 
         <import type="kr.timoky.accountbook.view.add.AddExpenseClickType" />
+
+        <import type="kr.timoky.accountbook.base.MoneyType" />
 
         <variable
             name="vm"
             type="kr.timoky.accountbook.view.add.AddExpenseViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/title"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/str_add_expense"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:layout_height="match_parent">
 
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <TextView
+                android:id="@+id/title"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:text="@string/str_add_expense"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/dateInput"
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/str_item_date"
-                    app:boxBackgroundColor="@color/white"
-                    app:boxBackgroundMode="outline"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_height="match_parent">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/dateEt"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/dateInput"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/str_item_date"
+                        app:boxBackgroundColor="@color/white"
+                        app:boxBackgroundMode="outline"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/dateEt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:enabled="false"
+                            app:setDateText="@{vm.selectDateLong}"
+                            app:formatPatternString="@{&quot;yyyy-MM-dd&quot;}"
+                            android:textColor="@color/black" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:onClick="@{() -> vm.onClick(AddExpenseClickType.DATE)}"
+                        app:layout_constraintBottom_toBottomOf="@+id/dateInput"
+                        app:layout_constraintEnd_toEndOf="@+id/dateInput"
+                        app:layout_constraintStart_toStartOf="@+id/dateInput"
+                        app:layout_constraintTop_toTopOf="@+id/dateInput" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/moneyInput"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:hint="@string/str_item_money"
+                        app:boxBackgroundColor="@color/white"
+                        app:boxBackgroundMode="outline"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/dateInput">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:textColor="@color/black"
+                            app:setMoney="@={vm.money}" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButtonToggleGroup
+                        android:id="@+id/moneyTypeButtonGroup"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:enabled="false"
-                        android:text="@{vm.selectDateString}"
-                        android:textColor="@color/black" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal"
+                        app:checkedButton="@+id/moneyTypeUse"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/moneyInput"
+                        app:setChecked="@={vm.moneyType}"
+                        app:selectionRequired="true"
+                        app:singleSelection="true">
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:onClick="@{() -> vm.onClick(AddExpenseClickType.DATE)}"
-                    app:layout_constraintBottom_toBottomOf="@+id/dateInput"
-                    app:layout_constraintEnd_toEndOf="@+id/dateInput"
-                    app:layout_constraintStart_toStartOf="@+id/dateInput"
-                    app:layout_constraintTop_toTopOf="@+id/dateInput" />
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/moneyTypeUse"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:tag="@{MoneyType.USE}"
+                            android:text="@string/str_item_expense_use" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/moneyInput"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:hint="@string/str_item_money"
-                    app:boxBackgroundColor="@color/white"
-                    app:boxBackgroundMode="outline"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/dateInput">
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/moneyTypeSave"
+                            style="?attr/materialButtonOutlinedStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:tag="@{MoneyType.SAVE}"
+                            android:text="@string/str_item_expense_save" />
+                    </com.google.android.material.button.MaterialButtonToggleGroup>
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/categoryInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:textColor="@color/black" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_marginTop="15dp"
+                        android:hint="@string/str_item_category"
+                        app:boxBackgroundColor="@color/white"
+                        app:boxBackgroundMode="outline"
+                        android:onClick="@{() -> vm.onClick(AddExpenseClickType.CATEGORY)}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/moneyTypeButtonGroup">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/moneyTypeInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:hint="@string/str_item_expense_type"
-                    android:onClick="@{() -> vm.onClick(AddExpenseClickType.MONEY_TYPE)}"
-                    app:boxBackgroundColor="@color/white"
-                    app:boxBackgroundMode="outline"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/moneyInput">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/categoryEt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:text="@{vm.category.name}"
+                            android:textColor="@color/black" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/moneyTypeEt"
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:onClick="@{() -> vm.onClick(AddExpenseClickType.CATEGORY)}"
+                        app:layout_constraintBottom_toBottomOf="@+id/categoryInput"
+                        app:layout_constraintEnd_toEndOf="@+id/categoryInput"
+                        app:layout_constraintStart_toStartOf="@+id/categoryInput"
+                        app:layout_constraintTop_toTopOf="@+id/categoryInput" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/addressInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:enabled="false"
-                        android:textColor="@color/black" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_marginTop="15dp"
+                        android:hint="@string/str_item_address"
+                        app:boxBackgroundColor="@color/white"
+                        app:boxBackgroundMode="outline"
+                        android:onClick="@{() -> vm.onClick(AddExpenseClickType.ADDRESS)}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/categoryInput">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/categoryInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:hint="@string/str_item_category"
-                    android:onClick="@{() -> vm.onClick(AddExpenseClickType.CATEGORY)}"
-                    app:boxBackgroundColor="@color/white"
-                    app:boxBackgroundMode="outline"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/moneyTypeInput">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/addressEt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:text="@{vm.address.address}"
+                            android:textColor="@color/black" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/categoryEt"
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:onClick="@{() -> vm.onClick(AddExpenseClickType.ADDRESS)}"
+                        app:layout_constraintBottom_toBottomOf="@+id/addressInput"
+                        app:layout_constraintEnd_toEndOf="@+id/addressInput"
+                        app:layout_constraintStart_toStartOf="@+id/addressInput"
+                        app:layout_constraintTop_toTopOf="@+id/addressInput" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/memoInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:enabled="false"
-                        android:textColor="@color/black" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_marginTop="15dp"
+                        android:hint="@string/str_item_memo"
+                        app:boxBackgroundColor="@color/white"
+                        app:boxBackgroundMode="outline"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/addressInput">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/addressInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:hint="@string/str_item_address"
-                    android:onClick="@{() -> vm.onClick(AddExpenseClickType.ADDRESS)}"
-                    app:boxBackgroundColor="@color/white"
-                    app:boxBackgroundMode="outline"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/categoryInput">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/memoEt"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="top"
+                            android:text="@={vm.memo}"
+                            android:textColor="@color/black" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.core.widget.NestedScrollView>
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/addressEt"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:enabled="false"
-                        android:textColor="@color/black" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/memoInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:hint="@string/str_item_memo"
-                    app:boxBackgroundColor="@color/white"
-                    app:boxBackgroundMode="outline"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/addressInput">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/memoEt"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="top"
-                        android:textColor="@color/black" />
-                </com.google.android.material.textfield.TextInputLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.core.widget.NestedScrollView>
-    </LinearLayout>
-
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="70dp"
+                android:backgroundTint="@color/white"
+                android:contentDescription="@string/str_add_expense"
+                android:src="@drawable/fab_add_expense"
+                android:visibility="@{vm.isSaveValid ? View.VISIBLE : View.GONE}"
+                android:onClick="@{() -> vm.onClick(AddExpenseClickType.ADD)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -8,7 +8,7 @@ import kr.timoky.domain.model.Result
 interface CategoryRepository {
     fun getCategoryList(): Flow<PagingData<CategoryModel>>
 
-    fun getCategory(id: Int): Flow<Result<CategoryModel>>
+    fun getCategory(id: Int): Flow<Result<CategoryModel?>>
 
     suspend fun insertCategory(item: CategoryModel)
 

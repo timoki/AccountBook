@@ -21,7 +21,7 @@ object ObjectMapper {
         money = this.money,
         isConsumption = this.isConsumption,
         categoryId = this.categoryId,
-        address = this.address.toModel(),
+        address = this.address?.toModel(),
         memo = this.memo,
     )
 
@@ -30,7 +30,7 @@ object ObjectMapper {
         money = this.money,
         isConsumption = this.isConsumption,
         categoryId = this.categoryId,
-        address = this.address.toEntity(),
+        address = this.address?.toEntity(),
         memo = this.memo,
     )
 

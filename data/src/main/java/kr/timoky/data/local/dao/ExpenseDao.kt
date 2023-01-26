@@ -54,7 +54,7 @@ interface ExpenseDao {
     )
     fun getExpense(id: Int): ExpenseEntity
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert
     fun insertExpenseItem(item: ExpenseItemEntity)
 
     @Delete

@@ -35,15 +35,19 @@ class CategoryRepositoryImpl @Inject constructor(
         }
     ).flow
 
-    override fun getCategory(id: Int): Flow<Result<CategoryModel>> = flow<Result<CategoryModel>> {
-        emit(
-            Result.Success(
-                localDataSource.getCategory(id).toModel()
+    override fun getCategory(id: Int): Flow<Result<CategoryModel?>> {
+
+        return flow<Result<CategoryModel?>> {
+            val response = localDataSource.getCategory(id)
+            emit(
+                Result.Success(
+                    response?.toModel()
+                )
             )
-        )
-    }.catch { exception ->
-        emit(Result.Error(exception.message))
-    }.flowOn(Dispatchers.IO)
+        }.catch { exception ->
+            emit(Result.Error(exception.message))
+        }.flowOn(Dispatchers.IO)
+    }
 
     override suspend fun insertCategory(item: CategoryModel) = withContext(Dispatchers.IO) {
         localDataSource.insertCategory(item.toEntity())

@@ -71,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/round_5dp"
-                account:backgroundTint="@{categoryColor}"
+                app:backgroundTint="@{categoryColor}"
                 android:backgroundTintMode="add"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="5dp"

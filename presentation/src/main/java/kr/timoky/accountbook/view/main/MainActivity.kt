@@ -15,12 +15,14 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI.navigateUp
 import androidx.transition.TransitionManager
 import com.google.android.material.transition.MaterialContainerTransform
 import com.google.android.material.transition.MaterialElevationScale
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
 import kr.timoky.accountbook.R
+import kr.timoky.accountbook.base.BaseViewModel
 import kr.timoky.accountbook.base.adapter.AdapterItemListener
 import kr.timoky.accountbook.databinding.ActivityMainBinding
 import kr.timoky.accountbook.utils.Common.showSnackBar
@@ -72,9 +74,9 @@ class MainActivity :
         navController.addOnDestinationChangedListener(this)
 
         bottomNavDrawer.apply {
-            addOnSlideAction(HalfClockwiseRotateSlideAction(binding.bottomAppbarArrow))
-            addOnSlideAction(AlphaSlideAction(binding.bottomAppbarTitle, true))
-            addOnStateChangedAction(ShowHideFabStateAction(binding.fab))
+            addOnSlideAction(HalfClockwiseRotateSlideAction(this@MainActivity.binding.bottomAppbarArrow))
+            addOnSlideAction(AlphaSlideAction(this@MainActivity.binding.bottomAppbarTitle, true))
+            addOnStateChangedAction(ShowHideFabStateAction(this@MainActivity.binding.fab))
             addOnStateChangedAction(ChangeSettingsMenuStateAction { showSettings ->
                 /*binding.bottomAppbar.replaceMenu(if (showSettings) {
                     R.menu.bottom_app_bar_settings_menu
@@ -104,11 +106,16 @@ class MainActivity :
 
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
+                if (bottomNavDrawer.isOpen) {
+                    bottomNavDrawer.toggle()
+                    return
+                }
+
                 if (navController.previousBackStackEntry == null || !navController.popBackStack()) {
                     if (System.currentTimeMillis() > backKeyPressedTime + 2000) {
                         backKeyPressedTime = System.currentTimeMillis()
                         showSnackBar(
-                            binding.navHostFragmentContainer,
+                            this@MainActivity,
                             getString(R.string.main_back_pressed)
                         )
                     } else if (System.currentTimeMillis() <= backKeyPressedTime + 2000) {
@@ -117,6 +124,8 @@ class MainActivity :
                 }
             }
         })
+
+        viewModel.checkDefaultCategory(1)
     }
 
     private fun initViewModelCallback() = with(viewModel) {
@@ -125,14 +134,6 @@ class MainActivity :
                 showLoadingDialog()
             } else {
                 hideLoadingDialog()
-            }
-        }
-
-        backStack.observeOnLifecycleDestroy(this@MainActivity) { back ->
-            if (back) {
-                popBackStack()
-            } else {
-                navigateUp()
             }
         }
 

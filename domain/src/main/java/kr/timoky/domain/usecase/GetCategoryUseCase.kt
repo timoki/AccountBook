@@ -11,7 +11,7 @@ class GetCategoryUseCase @Inject constructor(
 ) {
     operator fun invoke(
         id: Int
-    ): Flow<Result<CategoryModel>> {
+    ): Flow<Result<CategoryModel?>> {
         return categoryRepository.getCategory(id)
     }
 }

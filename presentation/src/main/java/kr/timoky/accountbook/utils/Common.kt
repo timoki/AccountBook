@@ -1,10 +1,15 @@
 package kr.timoky.accountbook.utils
 
+import android.app.Activity
+import android.content.Context
 import android.view.View
 import androidx.annotation.ColorInt
 import androidx.annotation.FloatRange
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.material.animation.ArgbEvaluatorCompat
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
+import kr.timoky.accountbook.R
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -42,10 +47,14 @@ object Common {
     }
 
     fun showSnackBar(
-        view: View,
+        activity: Activity,
         message: String
     ) {
-        Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()
+        val view = activity.findViewById<CoordinatorLayout>(R.id.coordinator)
+        val fab = activity.findViewById<FloatingActionButton>(R.id.fab)
+        Snackbar.make(view, message, Snackbar.LENGTH_SHORT)
+            .setAnchorView(fab)
+            .show()
     }
 }
 

@@ -3,7 +3,6 @@ package kr.timoky.data.local.dao
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
-import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kr.timoky.data.local.entity.CategoryEntity
 
@@ -13,9 +12,9 @@ interface CategoryDao {
     fun getCategoryList(): List<CategoryEntity>
 
     @Query("SELECT * FROM category WHERE _categoryId = :id")
-    fun getCategory(id: Int): CategoryEntity
+    fun getCategory(id: Int): CategoryEntity?
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert
     fun insertCategory(item: CategoryEntity)
 
     @Delete

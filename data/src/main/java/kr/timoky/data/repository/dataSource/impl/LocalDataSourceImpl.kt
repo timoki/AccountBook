@@ -42,7 +42,7 @@ class LocalDataSourceImpl @Inject constructor(
 
     override suspend fun getCategoryList(): List<CategoryEntity> = categoryDao.getCategoryList()
 
-    override suspend fun getCategory(id: Int): CategoryEntity = categoryDao.getCategory(id)
+    override suspend fun getCategory(id: Int): CategoryEntity? = categoryDao.getCategory(id)
 
     override suspend fun insertCategory(item: CategoryEntity) = categoryDao.insertCategory(item)
 

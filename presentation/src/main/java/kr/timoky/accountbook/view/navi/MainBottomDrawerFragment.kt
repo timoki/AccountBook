@@ -167,16 +167,17 @@ class MainBottomDrawerFragment :
 
     fun toggle() {
         if (behavior.state == STATE_HIDDEN) open()
-        else if (
-            behavior.state == BottomSheetBehavior.STATE_HALF_EXPANDED ||
-            behavior.state == BottomSheetBehavior.STATE_EXPANDED ||
-            behavior.state == BottomSheetBehavior.STATE_COLLAPSED
-        ) close()
+        else if (isOpen) close()
     }
 
     private fun open() {
         behavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
     }
+
+    val isOpen: Boolean
+    get() = behavior.state == BottomSheetBehavior.STATE_HALF_EXPANDED ||
+            behavior.state == BottomSheetBehavior.STATE_EXPANDED ||
+            behavior.state == BottomSheetBehavior.STATE_COLLAPSED
 
     fun close() {
         behavior.state = STATE_HIDDEN

@@ -25,7 +25,7 @@ interface LocalDataSource {
 
     suspend fun getCategoryList(): List<CategoryEntity>
 
-    suspend fun getCategory(id: Int): CategoryEntity
+    suspend fun getCategory(id: Int): CategoryEntity?
 
     suspend fun insertCategory(item: CategoryEntity)
 

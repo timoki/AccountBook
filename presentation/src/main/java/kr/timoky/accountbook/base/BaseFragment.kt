@@ -17,7 +17,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragment() {
     abstract fun initViewModelCallback()
     open fun navigationBackStackCallback() {}
 
-    protected lateinit var binding: VB
+    lateinit var binding: VB
     protected lateinit var viewModel: VM
     val mainViewModel: MainViewModel by activityViewModels()
 

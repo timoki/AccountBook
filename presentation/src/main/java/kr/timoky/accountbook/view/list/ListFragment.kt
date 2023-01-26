@@ -1,5 +1,6 @@
 package kr.timoky.accountbook.view.list
 
+import android.util.Log
 import android.view.View
 import androidx.paging.LoadState
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -43,21 +44,25 @@ class ListFragment : BaseFragment<FragmentListBinding, ListViewModel>(),
 
             binding.isResult = when {
                 it.refresh is LoadState.Loading -> {
+                    Log.d("아외안되", "Loading")
                     setShimmer(true)
                     true
                 }
 
                 it.refresh is LoadState.Error -> {
                     binding.noResult.errorString = getString(R.string.no_history_error)
+                    Log.d("아외안되", "Error")
                     false
                 }
 
                 it.refresh is LoadState.NotLoading && adapter.itemCount == 0 -> {
                     binding.noResult.errorString = getString(R.string.no_history_account)
+                    Log.d("아외안되", "NotLoading / 0")
                     false
                 }
 
                 else -> {
+                    Log.d("아외안되", "else / ${it.refresh}")
                     true
                 }
             }

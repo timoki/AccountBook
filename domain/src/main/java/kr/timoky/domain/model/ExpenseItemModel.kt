@@ -7,9 +7,9 @@ data class ExpenseItemModel(
     val date: Long,
     val money: Int,
     val isConsumption: Boolean,
-    val categoryId: Int,
-    val address: AddressModel,
-    val memo: String,
+    val categoryId: Int?,
+    val address: AddressModel?,
+    val memo: String?,
 ): BaseModel {
     override val key: Int
         get() = id ?: 0

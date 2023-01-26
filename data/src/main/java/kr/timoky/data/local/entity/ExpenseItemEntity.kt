@@ -17,12 +17,12 @@ import androidx.room.PrimaryKey
 )
 data class ExpenseItemEntity(
     @PrimaryKey(autoGenerate = true)
-    val _expenseId: Int = 1,
+    val _expenseId: Int = 0,
     val date: Long,
     val money: Int,
     val isConsumption: Boolean,
-    val categoryId: Int,
+    val categoryId: Int?,
     @Embedded
-    val address: AddressEntity,
-    val memo: String,
+    val address: AddressEntity?,
+    val memo: String?,
 )

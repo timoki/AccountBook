@@ -49,9 +49,9 @@ class ExpenseListAdapter :
                 binding.memo = memo
             }
 
-            model.category.apply {
-                binding.category = name
-                binding.categoryColor = color
+            model.category?.let {
+                binding.category = it.name
+                binding.categoryColor = it.color
             }
 
             binding.listener = listener
