@@ -4,12 +4,9 @@ plugins {
     id("kotlin-kapt")
 }
 
-val properties = org.jetbrains.kotlin.konan.properties.Properties()
-properties.load(project.rootProject.file("local.properties").inputStream())
-
 android {
     namespace = "kr.timoky.data"
-    compileSdk = properties.getProperty("compileSdk").toInt()
+    compileSdk = 33
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -23,13 +20,6 @@ android {
 dependencies {
     implementation(project(":domain"))
 
-    val roomVersion = properties.getProperty("room_version")
-    val retrofitVersion = properties.getProperty("retrofit_version")
-    val okhttpVersion = properties.getProperty("okhttp_version")
-    val coroutineVersion = properties.getProperty("coroutine_version")
-    val datastoreVersion = properties.getProperty("datastore_version")
-    val paging3Version = properties.getProperty("paging3_version")
-
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.5.1")
     implementation("com.google.android.material:material:1.7.0")
@@ -38,33 +28,33 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0")
 
     // Retrofit + Okhttp
-    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
-    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
-    implementation("com.squareup.okhttp3:okhttp:$okhttpVersion")
-    implementation("com.squareup.okhttp3:logging-interceptor:$okhttpVersion")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
 
     // Gson
     implementation("com.google.code.gson:gson:2.10")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
     // room
-    implementation("androidx.room:room-runtime:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
-    implementation("androidx.room:room-paging:$roomVersion")
-    kapt("androidx.room:room-compiler:$roomVersion")
+    implementation("androidx.room:room-runtime:2.5.0")
+    implementation("androidx.room:room-ktx:2.5.0")
+    implementation("androidx.room:room-paging:2.5.0")
+    kapt("androidx.room:room-compiler:2.5.0")
 
     // JavaX Inject
     implementation("javax.inject:javax.inject:1")
 
     // Coroutine
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
 
     //Paging 3.0
-    implementation("androidx.paging:paging-runtime-ktx:$paging3Version")
-    testImplementation("androidx.paging:paging-common:$paging3Version")
+    implementation("androidx.paging:paging-runtime-ktx:3.1.1")
+    testImplementation("androidx.paging:paging-common:3.1.1")
 
     // DataStore
-    implementation("androidx.datastore:datastore-preferences:$datastoreVersion")
-    implementation("androidx.datastore:datastore-core:$datastoreVersion")
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation("androidx.datastore:datastore-core:1.0.0")
 }
