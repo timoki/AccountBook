@@ -8,6 +8,7 @@ plugins {
 }
 
 android {
+    compileSdk = 33
     namespace = "kr.timoky.accountbook"
 
     defaultConfig {
