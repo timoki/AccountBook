@@ -1,13 +1,7 @@
 package kr.timoky.data.mapper
 
-import kr.timoky.data.local.entity.AddressEntity
-import kr.timoky.data.local.entity.CategoryEntity
-import kr.timoky.data.local.entity.ExpenseEntity
-import kr.timoky.data.local.entity.ExpenseItemEntity
-import kr.timoky.domain.model.AddressModel
-import kr.timoky.domain.model.CategoryModel
-import kr.timoky.domain.model.ExpenseItemModel
-import kr.timoky.domain.model.ExpenseModel
+import kr.timoky.data.local.entity.*
+import kr.timoky.domain.model.*
 
 object ObjectMapper {
     fun ExpenseEntity.toModel(): ExpenseModel = ExpenseModel(

@@ -14,6 +14,10 @@
             type="Boolean" />
 
         <variable
+            name="totalMoney"
+            type="Long" />
+
+        <variable
             name="vm"
             type="kr.timoky.accountbook.view.list.ListViewModel" />
 
@@ -27,10 +31,64 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/titleSection"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:paddingBottom="10dp"
+            android:visibility="@{isResult ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/totalMoneyTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="현재 보유중인 총 금액"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@{String.valueOf(totalMoney)}"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toBottomOf="@+id/totalMoneyTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/totalMoneyTitle"
+                app:layout_constraintTop_toTopOf="@+id/totalMoneyTitle"
+                tools:text="100,000" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:visibility="@{isResult ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleSection"
+            app:setOnRefreshListener="@{refreshListener}">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listRv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_list" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/noResultSwipe"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="@{isResult ? View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -42,20 +100,10 @@
                 layout="@layout/no_result"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="@{isResult ? View.GONE : View.VISIBLE}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/listRv"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:visibility="@{isResult ? View.VISIBLE : View.GONE}"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_list" />
-
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <com.facebook.shimmer.ShimmerFrameLayout

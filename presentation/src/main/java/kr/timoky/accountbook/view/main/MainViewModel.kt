@@ -1,18 +1,17 @@
 package kr.timoky.accountbook.view.main
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavDirections
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kr.timoky.accountbook.NavigationDirections
 import kr.timoky.accountbook.base.BaseViewModel
-import kr.timoky.accountbook.utils.Common.showSnackBar
 import kr.timoky.domain.model.CategoryModel
 import kr.timoky.domain.model.Result
 import kr.timoky.domain.model.navi.NavigateType
@@ -26,7 +25,8 @@ class MainViewModel @Inject constructor(
     private val insertCategoryUseCase: InsertCategoryUseCase
 ) : BaseViewModel() {
 
-    var currentPageTitle = "리스트"
+    private val _currentPageTitle = MutableStateFlow("리스트")
+    val currentPageTitle = _currentPageTitle.asStateFlow()
 
     private val _fabClickChannel = Channel<Unit>(Channel.CONFLATED)
     val fabClickChannel = _fabClickChannel.receiveAsFlow()
@@ -47,7 +47,7 @@ class MainViewModel @Inject constructor(
 
     fun fragmentNavigationSetting(item: NavigateType) = viewModelScope.launch {
         item.getItem?.let {
-            currentPageTitle = it.title
+            _currentPageTitle.value = it.title
         }
 
         _navigateToChannel.send(

@@ -7,6 +7,8 @@ import kr.timoky.data.local.entity.ExpenseItemEntity
 import java.sql.Date
 
 interface LocalDataSource {
+    suspend fun getTotalMoney(): Long
+
     fun getExpenseList(
         fromDate: Date? = null,
         toDate: Date? = null,

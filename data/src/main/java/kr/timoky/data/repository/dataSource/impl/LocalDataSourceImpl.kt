@@ -14,6 +14,8 @@ class LocalDataSourceImpl @Inject constructor(
     private val expenseDao: ExpenseDao,
     private val categoryDao: CategoryDao
 ) : LocalDataSource {
+    override suspend fun getTotalMoney(): Long = expenseDao.getTotalMoney()
+
     override fun getExpenseList(
         fromDate: Date?,
         toDate: Date?,

@@ -88,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="@{money}"
-                android:textColor="@{isConsumption ? @android:color/holo_blue_dark : @android:color/holo_red_light}"
+                android:textColor="@{isConsumption ? @android:color/holo_red_light : @android:color/holo_blue_dark}"
                 android:textSize="17sp"
                 app:layout_constraintStart_toStartOf="@+id/dateTv"
                 app:layout_constraintTop_toBottomOf="@+id/dateTv"

@@ -11,8 +11,8 @@ import kr.timoky.data.mapper.ObjectMapper.toEntity
 import kr.timoky.data.mapper.ObjectMapper.toModel
 import kr.timoky.data.repository.dataSource.LocalDataSource
 import kr.timoky.domain.model.ExpenseItemModel
-import kr.timoky.domain.model.Result
 import kr.timoky.domain.model.ExpenseModel
+import kr.timoky.domain.model.Result
 import kr.timoky.domain.repository.ExpenseRepository
 import kr.timoky.domain.utils.ErrorCallback
 import java.sql.Date
@@ -22,6 +22,17 @@ class ExpenseRepositoryImpl @Inject constructor(
     private val localDataSource: LocalDataSource,
     private val errorCallback: ErrorCallback
 ) : ExpenseRepository {
+    override fun getTotalMoney(): Flow<Result<Long>> =
+        flow<Result<Long>> {
+            emit(
+                Result.Success(
+                    localDataSource.getTotalMoney()
+                )
+            )
+        }.catch { exception ->
+            emit(Result.Error(exception.message))
+        }.flowOn(Dispatchers.IO)
+
     override fun getExpenseList(
         fromDate: Date?,
         toDate: Date?,

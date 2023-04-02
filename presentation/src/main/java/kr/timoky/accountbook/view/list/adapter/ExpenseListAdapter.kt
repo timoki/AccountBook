@@ -44,7 +44,7 @@ class ExpenseListAdapter :
             binding.model = model
             model.item.apply {
                 binding.date = calculationTime(date)
-                binding.money = "${if (isConsumption) "+" else "-"}${money}원"
+                binding.money = "${if (isConsumption) "-" else "+"}${money}원"
                 binding.isConsumption = isConsumption
                 binding.memo = memo
             }

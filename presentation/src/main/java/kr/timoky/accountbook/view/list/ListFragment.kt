@@ -1,6 +1,5 @@
 package kr.timoky.accountbook.view.list
 
-import android.util.Log
 import android.view.View
 import androidx.paging.LoadState
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -12,6 +11,7 @@ import kr.timoky.accountbook.databinding.FragmentListBinding
 import kr.timoky.accountbook.utils.observeOnLifecycleStop
 import kr.timoky.accountbook.view.list.adapter.ExpenseListAdapter
 import kr.timoky.domain.model.ExpenseModel
+import kr.timoky.domain.model.Result
 
 @AndroidEntryPoint
 class ListFragment : BaseFragment<FragmentListBinding, ListViewModel>(),
@@ -44,25 +44,21 @@ class ListFragment : BaseFragment<FragmentListBinding, ListViewModel>(),
 
             binding.isResult = when {
                 it.refresh is LoadState.Loading -> {
-                    Log.d("아외안되", "Loading")
                     setShimmer(true)
                     true
                 }
 
                 it.refresh is LoadState.Error -> {
                     binding.noResult.errorString = getString(R.string.no_history_error)
-                    Log.d("아외안되", "Error")
                     false
                 }
 
                 it.refresh is LoadState.NotLoading && adapter.itemCount == 0 -> {
                     binding.noResult.errorString = getString(R.string.no_history_account)
-                    Log.d("아외안되", "NotLoading / 0")
                     false
                 }
 
                 else -> {
-                    Log.d("아외안되", "else / ${it.refresh}")
                     true
                 }
             }
@@ -72,6 +68,27 @@ class ListFragment : BaseFragment<FragmentListBinding, ListViewModel>(),
     override fun initViewModelCallback(): Unit = with(viewModel) {
         getExpenseList().observeOnLifecycleStop(viewLifecycleOwner) {
             adapter.submitData(it)
+            getTotalMoney()
+        }
+
+        getTotalMoney().observeOnLifecycleStop(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> {
+
+                }
+
+                is Result.Success -> {
+                    binding.totalMoney = result.data
+                }
+
+                is Result.Error -> {
+
+                }
+
+                else -> {
+
+                }
+            }
         }
     }
 
@@ -89,6 +106,7 @@ class ListFragment : BaseFragment<FragmentListBinding, ListViewModel>(),
 
     override fun onRefresh() {
         binding.swipe.isRefreshing = false
+        binding.noResultSwipe.isRefreshing = false
         adapter.refresh()
     }
 }

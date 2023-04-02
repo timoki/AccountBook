@@ -1,7 +1,10 @@
 package kr.timoky.data.local.dao
 
 import androidx.paging.PagingSource
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
 import kr.timoky.data.local.entity.ExpenseEntity
 import kr.timoky.data.local.entity.ExpenseItemEntity
 
@@ -18,6 +21,20 @@ interface ExpenseDao {
                 "(:categoryId IS NOT NULL AND categoryId = :categoryId) AND " +
                 "(:memo IS NOT NULL AND memo LIKE '%' || :memo || '%')"
     )*/
+
+    @Query(
+        "select " +
+                "sum(" +
+                "case isConsumption when 1 then money * -1 end" +
+                ") +" +
+                "sum(" +
+                "case isConsumption when 0 then money end" +
+                ") " +
+                "from " +
+                "expenseItem"
+    )
+    fun getTotalMoney(): Long
+
     @Query(
         "SELECT DISTINCT " +
                 "ex.*, " +

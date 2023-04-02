@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <import type="android.view.View" />
 
         <import type="kr.timoky.accountbook.view.add.AddExpenseClickType" />
@@ -63,9 +64,9 @@
                             android:layout_height="wrap_content"
                             android:clickable="false"
                             android:enabled="false"
-                            app:setDateText="@{vm.selectDateLong}"
+                            android:textColor="@color/black"
                             app:formatPatternString="@{&quot;yyyy-MM-dd&quot;}"
-                            android:textColor="@color/black" />
+                            app:setDateText="@{vm.selectDateLong}" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <View
@@ -107,8 +108,8 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/moneyInput"
-                        app:setChecked="@={vm.moneyType}"
                         app:selectionRequired="true"
+                        app:setChecked="@={vm.moneyType}"
                         app:singleSelection="true">
 
                         <com.google.android.material.button.MaterialButton
@@ -136,9 +137,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:hint="@string/str_item_category"
+                        android:onClick="@{() -> vm.onClick(AddExpenseClickType.CATEGORY)}"
                         app:boxBackgroundColor="@color/white"
                         app:boxBackgroundMode="outline"
-                        android:onClick="@{() -> vm.onClick(AddExpenseClickType.CATEGORY)}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/moneyTypeButtonGroup">
@@ -167,9 +168,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:hint="@string/str_item_address"
+                        android:onClick="@{() -> vm.onClick(AddExpenseClickType.ADDRESS)}"
                         app:boxBackgroundColor="@color/white"
                         app:boxBackgroundMode="outline"
-                        android:onClick="@{() -> vm.onClick(AddExpenseClickType.ADDRESS)}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/categoryInput">
@@ -222,9 +223,9 @@
                 android:layout_marginBottom="70dp"
                 android:backgroundTint="@color/white"
                 android:contentDescription="@string/str_add_expense"
+                android:onClick="@{() -> vm.onClick(AddExpenseClickType.ADD)}"
                 android:src="@drawable/fab_add_expense"
                 android:visibility="@{vm.isSaveValid ? View.VISIBLE : View.GONE}"
-                android:onClick="@{() -> vm.onClick(AddExpenseClickType.ADD)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>

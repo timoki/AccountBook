@@ -2,6 +2,7 @@ package kr.timoky.accountbook.utils
 
 import android.app.Activity
 import android.content.Context
+import android.util.Log
 import android.view.View
 import androidx.annotation.ColorInt
 import androidx.annotation.FloatRange
@@ -24,16 +25,20 @@ object Common {
         calendar.time = createDate
 
         return when {
-            differenceValue < 60000 -> { //59초 보다 적다면
+            /*differenceValue in 0..59999 -> { //59초 보다 적다면
                 "방금 전"
             }
 
-            differenceValue < 3600000 -> { //59분 보다 적다면
+            differenceValue in 60000..3599999 -> { //59분 보다 적다면
                 TimeUnit.MILLISECONDS.toMinutes(differenceValue).toString() + "분 전"
             }
 
-            differenceValue < 86400000 -> { //23시간 보다 적다면
+            differenceValue in 3600000..86400000 -> { //23시간 보다 적다면
                 TimeUnit.MILLISECONDS.toHours(differenceValue).toString() + "시간 전"
+            }*/
+
+            differenceValue in 0..86400000 -> {
+                "오늘"
             }
 
             calendar.get(Calendar.YEAR) == nowYear -> { // 올해라면

@@ -3,11 +3,13 @@ package kr.timoky.domain.repository
 import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
 import kr.timoky.domain.model.ExpenseItemModel
-import kr.timoky.domain.model.Result
 import kr.timoky.domain.model.ExpenseModel
+import kr.timoky.domain.model.Result
 import java.sql.Date
 
 interface ExpenseRepository {
+    fun getTotalMoney(): Flow<Result<Long>>
+
     fun getExpenseList(
         fromDate: Date? = null,
         toDate: Date? = null,

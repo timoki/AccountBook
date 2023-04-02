@@ -14,6 +14,14 @@ import kr.timoky.domain.usecase.*
 object UseCaseModule {
     @Provides
     @ViewModelScoped
+    fun provideGetTotalMoneyUseCase(
+        expenseRepository: ExpenseRepository
+    ): GetTotalMoneyUseCase = GetTotalMoneyUseCase(
+        expenseRepository
+    )
+
+    @Provides
+    @ViewModelScoped
     fun provideGetExpenseListUseCase(
         expenseRepository: ExpenseRepository
     ): GetExpenseListUseCase = GetExpenseListUseCase(

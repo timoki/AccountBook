@@ -15,14 +15,12 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI.navigateUp
 import androidx.transition.TransitionManager
 import com.google.android.material.transition.MaterialContainerTransform
 import com.google.android.material.transition.MaterialElevationScale
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
 import kr.timoky.accountbook.R
-import kr.timoky.accountbook.base.BaseViewModel
 import kr.timoky.accountbook.base.adapter.AdapterItemListener
 import kr.timoky.accountbook.databinding.ActivityMainBinding
 import kr.timoky.accountbook.utils.Common.showSnackBar
